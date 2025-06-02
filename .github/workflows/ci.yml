@@ -1,0 +1,36 @@
+name: Continuous Integration
+
+# run workflow on pull request or push to main or master branch
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # get code
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # set up java
+    - name: Set up JDK 24
+      uses: actions/setup-java@v4
+      with:
+        java-version: '24'
+        distribution: 'temurin'
+    
+    # cache maven dependencies
+    - name: Cache Maven packages
+      uses: actions/cache@v4
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+    
+    # run tests
+    - name: Run tests
+      run: ./mvnw clean test
