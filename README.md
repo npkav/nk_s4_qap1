@@ -37,6 +37,9 @@ I believe my code meets clean code principles in the following ways:
 - I try to keep each method focused on a single responsibility
 - I try to follow a layered architecture, keeping each layer in a separate package
 
+## Difficulties
+I had trouble with GitHub Actions to the point of trying it on another repo entirely. I used AI for this in an attempt to understand but still am unsure about the implementation.
+
 ## Technologies Used
 - Java
 - Maven
